@@ -14,10 +14,10 @@
 ZPLUGIN="${ZDOTDIR:-$HOME}/.zplugin/bin/zplugin.zsh"
 
 if [[ ! -f "$ZPLUGIN" ]]; then
-  if (( $+commands[git] )); then
+  if (( $+commands[curl] )); then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
   else
-    echo 'git not found' >&2
+    echo 'curl not found' >&2
     exit 1
   fi
 fi
@@ -159,12 +159,10 @@ export WEECHAT_PASSPHRASE=`security find-generic-password -g -a weechat 2>&1| pe
 export EXA_COLORS="uu=38;5;249:un=38;5;241:gu=38;5;245:gn=38;5;241:da=38;5;245:sn=38;5;7:sb=38;5;7:ur=38;5;3;1:uw=38;5;5;1:ux=38;5;1;1:ue=38;5;1;1:gr=38;5;3:gw=38;5;5:gx=38;5;1:tr=38;5;3:tw=38;5;1:tx=38;5;1:di=38;5;12:ex=38;5;7;1:*.md=38;5;229;4:*.png=38;5;208:*.jpg=38;5;208:*.gif=38;5;208"
 
 ############### Direnv
-export NODE_VERSIONS="${HOME}/.node-versions";
-export NODE_VERSION_PREFIX="";
+export N_PREFIX="${HOME}/.n"
+export NODE_VERSIONS="${N_PREFIX}/n/versions/node"
+export NODE_VERSION_PREFIX=""
 (( $+commands[direnv] )) && eval "$(direnv hook zsh)"
-
-############### Jira
-(( $+commands[jira] )) && eval "$(jira --completion-script-zsh)"
 
 ############### Kitty
 if [[ ! -z "${KITTY_WINDOW_ID}" ]]; then
